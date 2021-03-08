@@ -1,14 +1,18 @@
 const express = require("express")
 const helmet = require("helmet")
-// const router = require(".//")
+const recipesRouter = require("./routers/router")
 
 const server = express()
 
 server.use(helmet())
 server.use(express.json())
 
-// server.use()
+server.use('/api', recipesRouter)
 
+server.get('/', (req, res) => {
+	res.status(200).json({api: "Hello World!"});
+  });
+  
 server.use((err, req, res, next) => {
 	console.log(err)
 

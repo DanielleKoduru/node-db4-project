@@ -1,7 +1,7 @@
 
 exports.seed = async function(knex) {
 	await knex("recipes").insert([   
-		{ name: "chicken curry" },
-		{ name: "burgers" },
+		{ id: 1, name: "chicken curry" },
+		{ id: 2, name: "burgers" },
 	])
 }

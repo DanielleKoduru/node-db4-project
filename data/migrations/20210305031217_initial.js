@@ -2,37 +2,37 @@
 exports.up = async function(knex) {
     await knex.schema.createTable("recipes", (table) => {
         table.increments("id")
-        table.text("name").notNull().unique()
+        table.text("name").notNullable().unique()
     })
 
     await knex.schema.createTable("ingredients", (table) => {
         table.increments("id")
-        table.text("name").notNull()
-        table.integer("recipes_id")
+        table.text("name").notNullable()
+        table.integer("recipe_id")
     })
 
     await knex.schema.createTable("instructions", (table) => {
         table.increments("id")
-        table.text("instructions").notNull()
+        table.text("instructions").notNullable()
         table
             .integer("step_number")
             .references("id")
             .inTable("instructions")
             .onDelete("SET NULL")
 
-        table.integer("recipes_id")
+        table.integer("recipe_id")
     })
 
     await knex.schema.createTable("amount", (table) => {
         table.increments("id")
-        table.text("amount").notNull()
-        table.integer("recipes_id")
+        table.text("amount").notNullable()
+        table.integer("recipe_id")
     })
 
     await knex.schema.createTable("recipe_ingredients", (table) => {
         table
             .integer("recipe_id")
-            .notNull()
+            .notNullable()
             .references("id")
             .inTable("recipes")
             .onDelete("CASCADE")
@@ -40,7 +40,7 @@ exports.up = async function(knex) {
 
         table
             .integer("ingredient_id")
-            .notNull()
+            .notNullable()
             .references("id")
             .inTable("ingredients")
             .onDelete("CASCADE")
